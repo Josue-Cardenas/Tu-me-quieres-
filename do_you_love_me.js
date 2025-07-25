@@ -5,17 +5,23 @@ const heartLoader = document.querySelector(".cssload-main");
 const yesBtn = document.querySelector(".js-yes-btn");
 const noBtn = document.querySelector(".js-no-btn");
 
-// mover el botón "No" cuando pasas el mouse
-noBtn.addEventListener("mouseover", () => {
+// Función que mueve el botón "No" aleatoriamente
+function moveButtonRandomly() {
   const newX = Math.floor(Math.random() * questionContainer.offsetWidth);
   const newY = Math.floor(Math.random() * questionContainer.offsetHeight);
 
-  noBtn.style.position = "absolute"; // asegúrate de que se pueda mover
+  noBtn.style.position = "absolute";
   noBtn.style.left = `${newX}px`;
   noBtn.style.top = `${newY}px`;
-});
+}
 
-// cuando haces clic en "Yes"
+// En PC (mouse)
+noBtn.addEventListener("mouseover", moveButtonRandomly);
+
+// En celular (tocar)
+noBtn.addEventListener("touchstart", moveButtonRandomly);
+
+// Cuando se toca el botón "Sí"
 yesBtn.addEventListener("click", () => {
   questionContainer.style.display = "none";
   heartLoader.style.display = "inherit";
@@ -26,4 +32,3 @@ yesBtn.addEventListener("click", () => {
     gifResult.play();
   }, 3000);
 });
-
